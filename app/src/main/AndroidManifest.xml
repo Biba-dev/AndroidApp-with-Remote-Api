@@ -15,7 +15,7 @@
             android:enabled="true"
             android:exported="true"></service>
         <activity android:name=".WindowsActivity" />
-
+        <activity android:name=".RoomsActivity" />
         <activity
             android:name=".WindowActivity"
             android:parentActivityName=".MainActivity" />

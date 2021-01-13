@@ -11,4 +11,8 @@ interface RoomApiService {
     @GET("rooms/{room_id} ")
     fun findById(@Path("room_id") id: Long): Call<RoomDto>
 
+    @GET("rooms/{room_id}/switchWindows")
+    fun switchRoomWindows(@Path("id") id: Long): Call<Void>
+
+
 }

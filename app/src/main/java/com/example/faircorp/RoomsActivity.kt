@@ -16,14 +16,14 @@ import kotlinx.coroutines.withContext
 
 class RoomsActivity : BasicActivity(), OnRoomSelectedListener {
 
-    val roomService = RoomService()
+   // val roomService = RoomService()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rooms)
 
-        val recyclerView = findViewById<RecyclerView>(R.id.list_rooms) // (2)
-        val adapter = RoomAdapter(this) // (3)
+        val recyclerView = findViewById<RecyclerView>(R.id.list_rooms)
+        val adapter = RoomAdapter(this)
 
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
@@ -32,12 +32,12 @@ class RoomsActivity : BasicActivity(), OnRoomSelectedListener {
 
 //        adapter.update(roomService.findAll()) // (4) I replace it by the below code.
 
-        runCatching { ApiServices().roomsApiService.findAll().execute() } // (1)
-            .onSuccess { adapter.update(it.body() ?: emptyList()) }  // (2)
-            .onFailure {
-                Toast.makeText(this, "Error on windows loading $it", Toast.LENGTH_LONG)
-                    .show()  // (3)
-            }
+//        runCatching { ApiServices().roomsApiService.findAll().execute() } // (1)
+//            .onSuccess { adapter.update(it.body() ?: emptyList()) }  // (2)
+//            .onFailure {
+//                Toast.makeText(this, "Error on windows loading $it", Toast.LENGTH_LONG)
+//                    .show()  // (3)
+//            }
 
 
         lifecycleScope.launch(context = Dispatchers.IO) { // (1)
@@ -57,6 +57,16 @@ class RoomsActivity : BasicActivity(), OnRoomSelectedListener {
                     }
                 }
         }
+    }
+
+    override fun onRoomWindowsSelected(
+        id: Long,
+        name: String,
+        current_temp: Double?,
+        target_temp: Double?
+    ) {
+        val intent = Intent(this, WindowsActivity::class.java)
+        startActivity(intent.putExtra(ROOM_ID_PARAM,id))
     }
 
     override fun onRoomSelected(id: Long) {

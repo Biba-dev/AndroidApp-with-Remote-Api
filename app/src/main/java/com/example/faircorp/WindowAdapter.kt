@@ -1,6 +1,7 @@
 package com.example.faircorp
 
 //import android.support.v7.widget.RecyclerView
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +15,8 @@ class WindowAdapter(val listener: OnWindowSelectedListener) :
         RecyclerView.ViewHolder(view) { // we create a WindowViewHolder which is able to hold fields defined in layout activity_windows_item.xml. When you scroll through the list view, system does not recreate these fields. It will update the values via method (7)
         val name: TextView = view.findViewById(R.id.txt_window_name)
         val room: TextView = view.findViewById(R.id.txt_window_room)
-        val status: TextView = view.findViewById(R.id.txt_status)
+        val status: TextView = view.findViewById(R.id.txt_window_status)
+        val context: Context = view.context
     }
 
     private val items =
