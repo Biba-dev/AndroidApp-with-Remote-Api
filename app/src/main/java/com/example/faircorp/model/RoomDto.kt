@@ -1,8 +1,10 @@
 package com.example.faircorp.model
 
-data class RoomDto(val id: Long,
-                   val name: String,
-                   val currentTemperature: Double?,
-                   val targetTemperature: Double?,
-                   val floor: Int,
-val windowslist: List<WindowDto>)
+data class RoomDto(
+    val id: Long,
+    val name: String,
+    val currenttmp: Double?,
+    val tmp: Double?,
+    val floor: Int,
+    val building: Long?
+)

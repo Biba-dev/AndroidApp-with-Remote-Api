@@ -9,35 +9,24 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.faircorp.model.ApiServices
-import com.example.faircorp.model.RoomService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class RoomsActivity : BasicActivity(), OnRoomSelectedListener {
 
-   // val roomService = RoomService()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rooms)
 
         val recyclerView = findViewById<RecyclerView>(R.id.list_rooms)
-        val adapter = RoomAdapter(this)
+        val adapter = RoomAdapter(this, this)
 
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
         recyclerView.setHasFixedSize(true)
         recyclerView.adapter = adapter
-
-//        adapter.update(roomService.findAll()) // (4) I replace it by the below code.
-
-//        runCatching { ApiServices().roomsApiService.findAll().execute() } // (1)
-//            .onSuccess { adapter.update(it.body() ?: emptyList()) }  // (2)
-//            .onFailure {
-//                Toast.makeText(this, "Error on windows loading $it", Toast.LENGTH_LONG)
-//                    .show()  // (3)
-//            }
 
 
         lifecycleScope.launch(context = Dispatchers.IO) { // (1)
@@ -57,6 +46,8 @@ class RoomsActivity : BasicActivity(), OnRoomSelectedListener {
                     }
                 }
         }
+
+
     }
 
     override fun onRoomWindowsSelected(
@@ -66,7 +57,7 @@ class RoomsActivity : BasicActivity(), OnRoomSelectedListener {
         target_temp: Double?
     ) {
         val intent = Intent(this, WindowsActivity::class.java)
-        startActivity(intent.putExtra(ROOM_ID_PARAM,id))
+        startActivity(intent.putExtra(ROOM_ID_PARAM, id))
     }
 
     override fun onRoomSelected(id: Long) {

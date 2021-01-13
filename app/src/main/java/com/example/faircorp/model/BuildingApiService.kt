@@ -5,9 +5,9 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface BuildingApiService {
-    @GET("building")
+    @GET("http://springapp-hiba-awad.cleverapps.io/api/building")
     fun findAll(): Call<List<BuildingDto>>
 
-    @GET("building/{id}")
+    @GET("http://springapp-hiba-awad.cleverapps.io/api/building/{id}")
     fun findById(@Path("id") id: Long): Call<BuildingDto>
 }

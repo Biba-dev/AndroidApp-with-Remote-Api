@@ -5,14 +5,13 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface RoomApiService {
-    @GET("rooms")
+    @GET("https://springapp-hiba-awad.cleverapps.io/api/rooms")
     fun findAll(): Call<List<RoomDto>>
 
-    @GET("rooms/{room_id} ")
+    @GET("https://springapp-hiba-awad.cleverapps.io/api/rooms/{room_id}")
     fun findById(@Path("room_id") id: Long): Call<RoomDto>
 
-    @GET("rooms/{room_id}/switchWindows")
+    @GET("http://springapp-hiba-awad.cleverapps.io/api/rooms/{room_id}/switchWindow")
     fun switchRoomWindows(@Path("id") id: Long): Call<Void>
-
 
 }

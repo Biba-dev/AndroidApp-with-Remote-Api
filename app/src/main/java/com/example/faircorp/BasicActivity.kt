@@ -21,6 +21,7 @@ open class BasicActivity : AppCompatActivity(){
         when(item.itemId){
             R.id.menu_windows -> startActivity(
                 Intent(this, WindowsActivity::class.java)
+
             )
             R.id.menu_rooms -> startActivity(
                     Intent(this, RoomsActivity::class.java)

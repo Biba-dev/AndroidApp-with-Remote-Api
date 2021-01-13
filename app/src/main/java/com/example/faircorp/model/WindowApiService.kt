@@ -7,13 +7,13 @@ import retrofit2.http.GET
 import retrofit2.http.PUT
 import retrofit2.http.Path
 
- interface WindowApiService {
-    @GET("windows")
+interface WindowApiService {
+    @GET("http://springapp-hiba-awad.cleverapps.io/api/windows")
     fun findAll(): Call<List<WindowDto>>
 
-    @GET("windows /{ windows _id} ")
-    fun findById(@Path("windows _id") id: Long): Call<WindowDto>
+    @GET("http://springapp-hiba-awad.cleverapps.io/api/windows/{windows_id}")
+    fun findById(@Path("windows_id") id: Long): Call<WindowDto>
 
-    @PUT("windows /{ windows _id} /switch ")// /api/windows /{ windows _id} /switch
-    fun updateWindowstatus(@Path("windows _id") id: Long, @Body window: WindowDto): Call<WindowDto>
+    @PUT("http://springapp-hiba-awad.cleverapps.io/api/windows/{windows_id}/switch ")// /api/windows /{ windows _id} /switch
+    fun updateWindowstatus(@Path("windows_id") id: Long, @Body window: WindowDto): Call<WindowDto>
 }

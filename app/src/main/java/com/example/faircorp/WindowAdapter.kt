@@ -1,7 +1,8 @@
 package com.example.faircorp
 
-//import android.support.v7.widget.RecyclerView
+
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,13 +10,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.faircorp.model.WindowDto
 
-class WindowAdapter(val listener: OnWindowSelectedListener) :
+class WindowAdapter(var activity: WindowsActivity) :
     RecyclerView.Adapter<WindowAdapter.WindowViewHolder>() { // an adapter must implement RecyclerView.Adapter wich manage a RecyclerView.ViewHolder
     inner class WindowViewHolder(view: View) :
         RecyclerView.ViewHolder(view) { // we create a WindowViewHolder which is able to hold fields defined in layout activity_windows_item.xml. When you scroll through the list view, system does not recreate these fields. It will update the values via method (7)
         val name: TextView = view.findViewById(R.id.txt_window_name)
         val room: TextView = view.findViewById(R.id.txt_window_room)
-        val status: TextView = view.findViewById(R.id.txt_window_status)
+        val status: TextView = view.findViewById(R.id.txt_status)
         val context: Context = view.context
     }
 
@@ -41,14 +42,18 @@ class WindowAdapter(val listener: OnWindowSelectedListener) :
         val window = items[position]
         holder.apply {
             name.text = window.name
-            status.text = window.status.toString()
-            room.text = window.room.name
-            itemView.setOnClickListener { listener.onWindowSelected(window.id) }
+            status.text = window.windowStatus.toString()
+            room.text = window.roomName
+            itemView.setOnClickListener {
+                var intent: Intent = Intent(holder.itemView.context, WindowActivity::class.java)
+                intent.putExtra("window_id", window.id)
+                activity.startActivity(intent)
+            }
         }
     }
 
 
-    override fun onViewRecycled(holder: WindowViewHolder) { // (2)
+    override fun onViewRecycled(holder: WindowViewHolder) {
         super.onViewRecycled(holder)
         holder.apply {
             itemView.setOnClickListener(null)

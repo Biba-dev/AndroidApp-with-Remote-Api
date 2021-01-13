@@ -1,3 +1,3 @@
 package com.example.faircorp.model
 
-data class BuildingDto (val id: Long, val name: String)
+data class BuildingDto(val id: Long, val name: String)
